@@ -83,8 +83,15 @@ window.addEventListener('DOMContentLoaded', function(){ // О C DOMContentLoaded
                 //а этот объект сейчас помещен в переменную t
                      minutes.textContent = t.minutes;
                      seconds.textContent = t.seconds;*/
-
-                        if(t.hours < 10){
+                    function addZero(x) {                       //решение препода
+                        if (x < 10){ 
+                            return ('0'+ x);
+                        } else return x;
+                    }
+                    hours.textContent = addZero(t.hours);
+                    minutes.textContent = addZero(t.minutes);
+                    seconds.textContent = addZero(t.seconds);
+                        /*if(t.hours < 10){                     //мое решение
                             hours.textContent = '0'+ t.hours; 
                         }else{
                             hours.textContent = t.hours;
@@ -98,20 +105,23 @@ window.addEventListener('DOMContentLoaded', function(){ // О C DOMContentLoaded
                             seconds.textContent = '0'+ t.seconds; 
                         }else{
                             seconds.textContent = t.seconds;
-                        }
+                        }*/
 
        
                      if (t.total <= 0) {
                          clearInterval(timeInterval);
+                         hours.textContent = '0'+ 0;    //решение препода
+                         minutes.textContent = '0'+ 0;
+                         seconds.textContent = '0'+ 0;
                     }
-                for (let key in t) {
+                /*for (let key in t) {                  //мое решение
                     if (t[key] < 0) {
                         hours.textContent = '0'+ 0;
                         minutes.textContent = '0'+0;
                         seconds.textContent = '0'+0;
                     }
                    
-                }
+                }*/
                 
     }
                 
