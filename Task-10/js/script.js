@@ -46,20 +46,21 @@ window.addEventListener('DOMContentLoaded', function(){ // О C DOMContentLoaded
 //4) ф-ция обновляющяя наш таймер каждую секунду
 
 //1)
-    let deadline = '2020-04-25';
+    let deadline = '2021-04-25';
 //2)
     function getTimeRemaining(endtime) { //в endtime мы будем передавать dedline
         let t = Date.parse(endtime) - Date.parse(new Date()),//переменная для разницы дат // new Date() - выдает текущую дату//результат - в милисекундах
             seconds = Math.floor((t/1000) % 60),//Math.floor - для округления 
             minutes = Math.floor((t/1000/60) % 60),
-            hours = Math.floor((t/(1000*60*60)));
-    // hours = Math.floor((t/(1000*60*60) % 24)),
-    // days = Math.floor((t/(1000*60*60*24))) //если в таймере нужны дни
+           // hours = Math.floor((t/(1000*60*60)));
+             hours = Math.floor((t/(1000*60*60) % 24)),
+             days = Math.floor((t/(1000*60*60*24))) //если в таймере нужны дни
 
     //экспортировать из функции несколько переменнжых мы не можем, но объект - можем:
 
         return{// в {} - заключен возвращаемый объектж
             'total' : t, //эту переменную мы будем использовать для остановки таймера(при достижении нуля)
+            'days' : days,
             'hours' : hours,
             'minutes' : minutes,
             'seconds' : seconds
@@ -72,6 +73,7 @@ window.addEventListener('DOMContentLoaded', function(){ // О C DOMContentLoaded
     function setClock(id, endtime){//id - из верстки(для того, чтобы нашли этот элемент)
 //для изменения статических цифр из верстки в динамические данные нам нужно получить эти элементы:
             let timer = document.getElementById(id),
+                days = timer.querySelector('.days'),
                 hours = timer.querySelector('.hours'), //получаем из блока, полученного в переменной 
                 minutes = timer.querySelector('.minutes'), //получаем из блока, полученного в переменной timer
                 seconds = timer.querySelector('.seconds'), //получаем из блока, полученного в переменной timer
@@ -83,14 +85,29 @@ window.addEventListener('DOMContentLoaded', function(){ // О C DOMContentLoaded
                 //а этот объект сейчас помещен в переменную t
                      minutes.textContent = t.minutes;
                      seconds.textContent = t.seconds;*/
+
+                     function addDay(numDay) {
+                         if (numDay == 1) {
+                             return numDay + ' день';
+                         } else if (1 < numDay && numDay < 5){
+                             return numDay + ' дня';
+                         } else if (numDay == 0){
+                            return ' ';
+                         }else
+                         return  numDay + ' дней';
+                     
+                         
+                     }
                     function addZero(x) {                       //решение препода
                         if (x < 10){ 
                             return ('0'+ x);
                         } else return x;
                     }
+                    days.textContent = addDay(t.days);
                     hours.textContent = addZero(t.hours);
                     minutes.textContent = addZero(t.minutes);
                     seconds.textContent = addZero(t.seconds);
+                  
                         /*if(t.hours < 10){                     //мое решение
                             hours.textContent = '0'+ t.hours; 
                         }else{
@@ -106,13 +123,27 @@ window.addEventListener('DOMContentLoaded', function(){ // О C DOMContentLoaded
                         }else{
                             seconds.textContent = t.seconds;
                         }*/
-
-       
+/*
+                        for (let key in t){                 //мое решение-попытка №1
+                            if(t[key]<10){
+                                t[key]= '0'+t[key];
+                            } else {
+                               // days.textContent = t.days;
+                                hours.textContent = t.hours;
+                                minutes.textContent = t.minutes;
+                                seconds.textContent = t.seconds;
+                            }
+                            console.log(t[key]);
+                        }
+*/
+                     let timerAction = document.querySelector('.timer-action');
                      if (t.total <= 0) {
                          clearInterval(timeInterval);
+                         days.textContent = ' ';
                          hours.textContent = '0'+ 0;    //решение препода
                          minutes.textContent = '0'+ 0;
                          seconds.textContent = '0'+ 0;
+                         timerAction.textContent = 'Акция завершена';
                     }
                 /*for (let key in t) {                  //мое решение
                     if (t[key] < 0) {

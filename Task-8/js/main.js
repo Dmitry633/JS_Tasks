@@ -15,7 +15,7 @@ let
     approve2 = document.getElementsByTagName('button')[1],
 	calc = document.getElementsByTagName('button')[2],
 	allButtons = document.querySelectorAll('button'),
-    oExpenses = document.querySelectorAll('.optionalexpenses-item'),
+    oExpenses= document.querySelectorAll('.optionalexpenses-item'),
     IncomeItem = document.querySelector('.choose-income'),
     checkbox = document.querySelector('#savings'),
     sumValue = document.querySelector('#sum'),
@@ -65,7 +65,7 @@ startCalc.addEventListener('click', function() {
     appData.budget = money;//Значения, полученные от пользователя необходимо записать в глобальный объект appData
     appData.timeData = time;
     budgetValue.textContent = money.toFixed();//присвоим занчение money графе Доход
-    yearValue.value = new Date(Date.parse(time)).getFullYear();
+    yearValue.value = new Date(Date.parse(time)).getFullYear();//в html странице это тэг input --для него есть удобный для ввода метод value
     monthValue.value = new Date(Date.parse(time)).getMonth() + 1;
 	dayValue.value = new Date(Date.parse(time)).getDate();
 
