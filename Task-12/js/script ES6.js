@@ -137,29 +137,34 @@ window.addEventListener('DOMContentLoaded', function(){ // О C DOMContentLoaded
 
    // const more = document.querySelector('.more'),
     const overlay = document.querySelector('.overlay'),
-        close = document.querySelector('.popup-close');
+        close = document.querySelector('.popup-close'),
       //  descrBtn = document.getElementsByClassName('description-btn');
-
-
+      bigBox = document.querySelector('#about');
+      //  descrBtn = document.getElementsByClassName('description-btn');
     class modWin{
-        constructor (arg) {
+      constructor (arg) {
         const a = document.querySelectorAll(arg);
-        for(let i=0; i < a.length; i++){
+        for (let i=0; i < a.length; i++){
             a[i].addEventListener('click', function() {
-            overlay.style.display = 'block';//меняется стиль на block (блочная модель)
-            this.classList.add('more-splash');//анимация, прописанная в цсс
-            document.body.style.overflow = 'hidden';//для фиксации окна вов время открытия мод окошка
-        });
-        close.addEventListener('click', () => {
-            overlay.style.display = 'none';
-            a[i].classList.remove('more-splash');//this нам уже то=ут не подходит, т к мы поппадем на сам крестик, потму меняем на more
-            document.body.style.overflow = '';
-        });
+                overlay.style.display = 'block';//меняется стиль на block (блочная модель)
+                this.classList.add('more-splash');//анимация, прописанная в цсс
+                document.body.style.overflow = 'hidden';//для фиксации окна вов время открытия мод окошка
+            });
+            close.addEventListener('click', () => {
+                 overlay.style.display = 'none';
+                 a[i].classList.remove('more-splash');//this нам уже то=ут не подходит, т к мы поппадем на сам крестик, потму меняем на more
+                 document.body.style.overflow = '';
+            });
         }
-        }
+      }
     }
-
-   new modWin ('.more');
-   new modWin ('.description-btn');
+    
+   bigBox.addEventListener('click', function(event) {
+       const trgt = event.target;
+        if (trgt && (trgt.classList.contains('description-btn') || trgt.classList.contains('more'))) {
+        new modWin ('.more');
+        new modWin ('.description-btn');
+        }
+    });
 
 });
