@@ -145,7 +145,7 @@ window.addEventListener('DOMContentLoaded', function(){ // О C DOMContentLoaded
         constructor (arg) {
         const a = document.querySelectorAll(arg);
         for(let i=0; i < a.length; i++){
-            a[i].addEventListener('click', () => {
+            a[i].addEventListener('click', function() {
             overlay.style.display = 'block';//меняется стиль на block (блочная модель)
             this.classList.add('more-splash');//анимация, прописанная в цсс
             document.body.style.overflow = 'hidden';//для фиксации окна вов время открытия мод окошка
